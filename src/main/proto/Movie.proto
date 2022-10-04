@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.example.movieapi.proto";
+
+message MovieRequest {}
+
+message Movie {
+  int64 id = 1;
+  string status = 2;
+  double vote_average = 3;
+  string tagline = 4;
+  string original_language = 5;
+  string original_title = 6;
+  string overview = 7;
+  int32 popularity = 8;
+  string poster_path = 9;
+  string release_date = 10;
+  int32 revenue = 11;
+  int64 budget = 12;
+  bool favorite = 13;
+}
+message MovieResponse {
+  repeated Movie movie = 1;
+}
+message MovieDetailRequest {
+  int64 id = 1;
+}
+
+
+message Genres {
+  int64 id = 1;
+  string name = 2;
+  int64 movie_id = 3;
+}
+message ProductionCompanies {
+  int64 id = 1;
+  string name=2;
+  string logo_path=3;
+  int64 movie_id=4;
+}
+message ProductionCountries {
+  int64 id=1;
+  string name= 2;
+  int64 movie_id = 3;
+}
+message UpdateMovieRequest{
+  int64 id = 1;
+  string status = 2;
+  double vote_average = 3;
+  string tagline = 4;
+  string original_language = 5;
+  string original_title = 6;
+  string overview = 7;
+  int32 popularity = 8;
+  string poster_path = 9;
+  string release_date = 10;
+  int32 revenue = 11;
+  int64 budget = 12;
+  bool favorite = 13;
+}
+message MovieDetailResponse {
+  int64 id = 1;
+  string status = 2;
+  double vote_average = 3;
+  string tagline = 4;
+  string original_language = 5;
+  string original_title = 6;
+  string overview = 7;
+  int32 popularity = 8;
+  string poster_path = 9;
+  string release_date = 10;
+  int32 revenue = 11;
+  int64 budget = 12;
+  bool favorite = 13;
+  repeated  Genres genres =14;
+  repeated ProductionCompanies productionCompanies = 15;
+  repeated ProductionCountries productionCountries = 16;
+}
+service MovieService {
+  rpc getAllMovies(MovieRequest) returns (MovieResponse);
+  rpc getMovieById(MovieDetailRequest) returns (MovieDetailResponse);
+  rpc updateMovie(UpdateMovieRequest) returns (Movie);
+}
